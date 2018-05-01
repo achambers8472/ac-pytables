@@ -3,6 +3,7 @@ import string
 import operator
 import subprocess
 import itertools
+import functools
 
 
 def any_equal(iterable):
@@ -415,7 +416,7 @@ class Table(list):
             except StopIteration:
                 pass
 
-        if misc.any_equal(l2):
+        if any_equal(l2):
             raise ValueError
 
         return Table(
@@ -425,7 +426,7 @@ class Table(list):
 
     @staticmethod
     def merge(tables):
-        return reduce(Table._merge_helper, tables)
+        return functools.reduce(Table._merge_helper, tables)
 
     @staticmethod
     def zip_merge(*tables):
@@ -482,4 +483,4 @@ class Table(list):
             )
 
     def unique(self):
-        return misc.unique(self)
+        return unique(self)
