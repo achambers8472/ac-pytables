@@ -257,9 +257,12 @@ class Table(list):
         cursor = connection.cursor()
         if keys is None:
             keys = [row[1] for row in cursor.execute('pragma table_info({})'.format(table_name))]
+        for key in keys:
+            if not safe(key):
+                raise ValueError('Key name is not safe: {}'.format(key))
         return Table.from_list_of_tuples(
             keys,
-            list(cursor.execute('select * from {}'.format(table_name)))
+            list(cursor.execute('select {} from {}'.format(','.join(keys), table_name)))
         )
 
 
