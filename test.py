@@ -1,5 +1,5 @@
 import pytest
-from actables import Table, Record
+from simtables import Table, Record
 
 
 class TestRecord:
