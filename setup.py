@@ -1,6 +1,6 @@
 import setuptools
 
-with open('README.rst', 'r') as fh:
+with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -11,7 +11,7 @@ setuptools.setup(
     description='Simple tables',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/achambers8472/ac-pytables',
+    url='https://github.com/achambers8472/simtables',
     packages=setuptools.find_packages(),
     classifiers=(
         'Programming Language :: Python :: 3',
