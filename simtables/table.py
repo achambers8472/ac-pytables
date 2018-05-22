@@ -1,3 +1,6 @@
+import csv
+import json
+import yaml
 import math
 import string
 import operator
@@ -133,6 +136,14 @@ class Table(list):
             list(cursor.execute('select {} from {}'.format(','.join(keys), table_name)))
         )
 
+    def from_csv(fh):
+        return Table.from_list_of_dicts(csv.DictReader(fh))
+
+    def from_json(fh):
+        return Table.from_list_of_dicts(json.load(fh))
+
+    def from_yaml(fh):
+        return Table.from_list_of_dicts(yaml.load(fh))
 
     def copy(self):
         return Table(record.copy() for record in self)
