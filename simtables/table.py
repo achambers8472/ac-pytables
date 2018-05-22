@@ -120,8 +120,11 @@ class Table(list):
         if not safe(table_name):
             raise ValueError('Table name is not safe: {}'.format(table_name))
         cursor = connection.cursor()
+        table_info = list(cursor.execute('pragma table_info({})'.format(table_name)))
+        if not table_info:
+            raise ValueError("No table '{}' in {}".format(table_name, connection))
         if keys is None:
-            keys = [row[1] for row in cursor.execute('pragma table_info({})'.format(table_name))]
+            keys = [row[1] for row in table_info]
         for key in keys:
             if not safe(key):
                 raise ValueError('Key name is not safe: {}'.format(key))
