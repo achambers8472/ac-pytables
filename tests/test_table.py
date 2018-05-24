@@ -263,6 +263,9 @@ class TestTable:
             Record(x=3, y=3, z=4),
             ])
 
+        with pytest.raises(KeyError):
+            t.key_sorted(['a'])
+
     def test_key_filter(self):
         t = Table([
             Record(x=1, y=2, z=3),
