@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='simtables',
-    version='0.0.2',
+    version='0.1.0',
     author='Alexander Chambers',
     author_email='alexander.chambers8472@gmail.com',
     description='Simple tables',
