@@ -138,6 +138,19 @@ class Table(list):
 
     def from_csv(fh):
         return Table.from_list_of_dicts(csv.DictReader(fh))
+    load_csv = from_csv
+
+    def save_csv(table, fh, first_keys=None, *args, **kwargs):
+        if first_keys is None:
+            first_keys = []
+        keys = first_keys + sorted([key for key in table.keys() if key not in first_keys])
+        for key in table.keys():
+            if key not in table.keys():
+                raise ValueError('Key \'{}\' not in Table'.format(key))
+        writer = csv.DictWriter(fh, keys, *args, **kwargs)
+        writer.writeheader()
+        for record in table:
+            writer.writerow(record)
 
     def from_json(fh):
         return Table.from_list_of_dicts(json.load(fh))
