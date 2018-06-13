@@ -136,8 +136,9 @@ class Table(list):
             list(cursor.execute('select {} from {}'.format(','.join(keys), table_name)))
         )
 
-    def from_csv(fh):
-        return Table.from_list_of_dicts(csv.DictReader(fh))
+    def from_csv(fh, *args, **kwargs):
+        return Table.from_list_of_dicts(csv.DictReader(fh, *args, **kwargs))
+
     load_csv = from_csv
 
     def save_csv(table, fh, first_keys=None, *args, **kwargs):

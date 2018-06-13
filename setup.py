@@ -18,6 +18,7 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ),
+    package_data={'simtables': ['data/*.csv']},
     # setup_requires=['pytest-runner'],
     # tests_require=['pytest'],
     # test_suite='tests',
