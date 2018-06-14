@@ -416,3 +416,26 @@ class TestTable:
         ])
         with pytest.raises(ValueError):
             s.match({"x": 1, "z": 3})
+
+    def test_key_full_groupby_aggregate(self):
+        t = Table([
+            Record(x=1, y=2, z=3),
+            Record(x=1, y=6, z=3),
+            Record(x=1, y=2, z=3),
+            ])
+        assert (
+            t.key_full_groupby_aggregate(['y'], {'sumx': (sum, 'x')})
+            ==
+            Table([
+                Record(y=2, sumx=2),
+                Record(y=6, sumx=1),
+            ])
+        )
+        assert (
+            t.key_full_groupby_aggregate(['y', 'z'], {'len': (len, 'x')})
+            ==
+            Table([
+                Record(y=2, z=3, len=2),
+                Record(y=6, z=3, len=1),
+            ])
+        )

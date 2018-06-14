@@ -298,6 +298,13 @@ class Table(list):
             in full_groupby(self, key=lambda r: r.get(keys))
         ]
 
+    def key_full_groupby_aggregate(self, keys, aggregates):
+        return Table(
+            head + {target_key: aggregate(subtable[key])
+                    for target_key, (aggregate, key) in aggregates.items()}
+            for head, subtable in self.key_full_groupby(keys)
+        )
+
     def key_partition(self, kwargs):
         return self.partition(lambda record: record[kwargs.keys()] == kwargs)
 
